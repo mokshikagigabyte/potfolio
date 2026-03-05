@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -10,6 +10,8 @@
   --card-bg: #ffffff;
   --card-border: #e4e4e7;
   --surface: #f4f4f5;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 @theme inline {
@@ -19,7 +21,7 @@
   --color-accent: var(--accent);
   --color-secondary: var(--secondary);
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,40 +53,59 @@ body {
 }
 
 h1,
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+
 h2,
 h3,
-h4,
-i {
-  font-family: var(--font-heading);
+h4 {
+  font-family: var(--font-sans);
   letter-spacing: -0.02em;
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
 }
 
 .border-subtle {
   border: 1px solid var(--card-border);
 }
 
-.card {
+.card-formal {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.card:hover {
+.card-formal:hover {
   border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.text-balance {
-  text-wrap: balance;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
 
 .section-label {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   color: var(--accent);
   margin-bottom: 1rem;
   display: block;
+}
+
+.text-balance {
+  text-wrap: balance;
 }

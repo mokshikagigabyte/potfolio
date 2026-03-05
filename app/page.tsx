@@ -1,156 +1,285 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Terminal,
+  Cpu,
+  Globe,
+  Award,
+  BookOpen,
+  ArrowUpRight
+} from "lucide-react";
 
 export default function Home() {
+  const socialLinks = [
+    { icon: <Github size={20} />, href: "https://github.com/mokshikagigabyte", label: "GitHub" },
+    { icon: <Linkedin size={20} />, href: "https://linkedin.com/in/mokshika-sharma", label: "LinkedIn" },
+    { icon: <Mail size={20} />, href: "mailto:mokshika470@gmail.com", label: "Email" }
+  ];
+
   const projects = [
     {
       title: "ScriptSheetAI",
       role: "AI-Powered Sheet Generator",
       desc: "Structured data generation using OCR and LLMs for rapid information organization.",
       tech: ["Python", "OpenCV", "Tesseract", "Flask"],
-      category: "AI & Automation"
+      category: "AI & Automation",
+      icon: <Cpu className="text-accent" />
     },
     {
       title: "ShopEasy",
       role: "E-commerce Platform",
       desc: "Full-stack marketplace with optimized checkout flows and inventory management.",
       tech: ["Node.js", "Express", "MongoDB", "Auth"],
-      category: "Web Engineering"
+      category: "Web Engineering",
+      icon: <Globe className="text-accent" />
     },
     {
       title: "ChatRoomApp",
       role: "Messaging Platform",
       desc: "Instant communication with persistent chatrooms and socket-based updates.",
       tech: ["Flask", "Socket.IO", "React", "State"],
-      category: "Real-time"
+      category: "Real-time",
+      icon: <Terminal className="text-accent" />
     },
     {
       title: "Nutrition Tracker",
       role: "Health Web App",
       desc: "A data-driven nutrition tracker with recipe integration and calorie profiling.",
       tech: ["JavaScript", "Recipes API", "CSS3", "HTML5"],
-      category: "Health"
+      category: "Health",
+      icon: <Award className="text-accent" />
     }
   ];
 
-  const education = {
-    degree: "B.Tech in Computer Science & Engineering (AI)",
-    school: "Mandsaur University",
-    period: "2023 — 2027",
-    details: "Specializing in Intelligent Systems and Machine Learning applications."
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6, ease: [0.23, 1, 0.32, 1] }
   };
 
-  const certifications = [
-    "Google Cloud: Generative AI Suite",
-    "IBM SkillsBuild: AI Agents Mastery",
-    "Deloitte: Data Analytics Certification",
-    "Infosys: Python Foundation",
-    "1M1B Virtual Internship"
-  ];
+  const stagger = {
+    initial: { opacity: 0 },
+    whileInView: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
 
   return (
-    <main className="min-h-screen pt-40 pb-32 px-6 max-w-5xl mx-auto selection:bg-accent selection:text-white">
-      {/* Hero */}
-      <section className="mb-40">
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-balance">
-          Mokshika Sharma
-        </h1>
-        <p className="text-xl md:text-2xl text-secondary mb-10 max-w-2xl font-medium leading-relaxed">
-          AI & Web Application Developer. Specializing in intelligent systems and robust digital experiences.
-        </p>
-        <div className="flex gap-4">
-          <a href="#projects" className="px-6 py-3 bg-primary text-background rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity">
-            View Projects
-          </a>
-          <a href="#contact" className="px-6 py-3 border-subtle rounded-lg font-semibold text-sm hover:bg-surface transition-colors">
-            Contact
-          </a>
-        </div>
-      </section>
-
-      {/* About & Education */}
-      <section id="about" className="grid md:grid-cols-2 gap-20 mb-40 pt-20 border-t border-card-border">
-        <div>
-          <span className="section-label">Identity</span>
-          <h2 className="text-3xl font-bold mb-6">Pragmatic AI Specialist</h2>
-          <p className="text-secondary leading-relaxed mb-6 font-medium">
-            Passionate about building systems that bridge modern AI with functional web architecture. Hands-on experience with OpenCV, Python, and the full web stack.
-          </p>
-          <p className="text-secondary leading-relaxed font-medium">
-            Thrives in collaborative environments, focusing on solving real-world challenges through elegant, well-documented code and scalable design.
-          </p>
-        </div>
-        <div className="card p-8 bg-surface border-none shadow-sm">
-          <span className="section-label">Education</span>
-          <h3 className="text-xl font-bold mb-2">{education.degree}</h3>
-          <p className="font-semibold text-sm mb-4 opacity-70">{education.school}</p>
-          <div className="px-3 py-1 bg-background border-subtle inline-block rounded-md text-[10px] font-bold uppercase mb-4">
-            {education.period}
-          </div>
-          <p className="text-sm text-secondary font-medium">{education.details}</p>
-        </div>
-      </section>
-
-      {/* Projects */}
-      <section id="projects" className="mb-40">
-        <div className="flex justify-between items-end mb-16">
-          <div>
-            <span className="section-label">Experience</span>
-            <h2 className="text-3xl font-bold">Selected Work</h2>
-          </div>
-        </div>
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((p, i) => (
-            <div key={i} className="card p-10 flex flex-col group">
-              <span className="text-[10px] font-bold text-accent uppercase mb-4">{p.category}</span>
-              <h3 className="text-2xl font-bold mb-1">{p.title}</h3>
-              <p className="text-sm font-semibold opacity-50 mb-6">{p.role}</p>
-              <p className="text-secondary mb-10 flex-grow leading-relaxed font-medium">{p.desc}</p>
-              <div className="flex flex-wrap gap-2 pt-6 border-t border-card-border/50">
-                {p.tech.map(t => (
-                  <span key={t} className="text-[10px] font-bold opacity-60 px-2 py-1 bg-surface rounded uppercase">{t}</span>
-                ))}
-              </div>
-            </div>
+    <main className="min-h-screen bg-background selection:bg-accent selection:text-white">
+      {/* Navigation - Minimalist */}
+      <nav className="fixed top-0 w-full z-50 px-6 py-8 flex justify-between items-center backdrop-blur-sm">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-lg font-bold tracking-tighter"
+        >
+          MS.
+        </motion.div>
+        <div className="flex gap-6">
+          {socialLinks.map((link, i) => (
+            <motion.a
+              key={i}
+              href={link.href}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="text-secondary hover:text-accent transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.icon}
+            </motion.a>
           ))}
         </div>
+      </nav>
+
+      {/* Hero */}
+      <section className="pt-48 pb-40 px-6 max-w-5xl mx-auto">
+        <motion.div {...fadeIn}>
+          <span className="section-label mb-4">Available for Opportunities</span>
+          <h1 className="text-7xl md:text-9xl font-serif mb-8 leading-[0.85] tracking-tight">
+            Mokshika <br /> Sharma
+          </h1>
+          <p className="text-xl md:text-3xl text-secondary mb-12 max-w-2xl font-medium leading-tight text-balance">
+            AI Specialist & Web Developer crafting intelligent, high-performance digital systems.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-primary text-background rounded-full font-bold text-sm"
+            >
+              Start a Project
+            </motion.button>
+            <div className="flex items-center gap-2 px-6 py-4 rounded-full border-subtle font-semibold text-sm">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              India, GMT+5:30
+            </div>
+          </div>
+        </motion.div>
       </section>
 
-      {/* Skills & Certs */}
-      <section className="grid lg:grid-cols-3 gap-16 mb-40">
-        <div className="lg:col-span-1">
-          <span className="section-label">Competencies</span>
-          <h2 className="text-3xl font-bold mb-6">Technical Arsenal</h2>
-          <p className="text-secondary font-medium">Core proficiencies in AI, Backend, and Scalable Web Foundations.</p>
-        </div>
-        <div className="lg:col-span-2 grid sm:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            {["Python & OpenCV", "Machine Learning", "FastAPI / Node.js", "React & Next.js"].map(s => (
-              <div key={s} className="pb-4 border-b border-card-border flex justify-between items-center group cursor-default">
-                <span className="font-bold text-lg group-hover:text-accent transition-colors">{s}</span>
-                <span className="text-[10px] font-black opacity-20">EXPERT</span>
+      {/* About & Expertise */}
+      <section id="about" className="py-40 px-6 bg-surface">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-12 gap-16">
+          <motion.div className="md:col-span-7" {...fadeIn}>
+            <span className="section-label">Identity & Background</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+              Bridging Machine <br /> Intelligence with Web.
+            </h2>
+            <p className="text-xl text-secondary leading-relaxed mb-8 font-medium">
+              Currently pursuing B.Tech in CSE (AI) at Mandsaur University. I specialize in building functional systems where AI isn't just a buzzword, but a core architectural strength.
+            </p>
+            <div className="grid grid-cols-2 gap-8 mt-12">
+              <div>
+                <h4 className="font-bold mb-2">Focus</h4>
+                <p className="text-secondary text-sm font-medium">Computer Vision, Machine Learning, Scalable Backend.</p>
               </div>
-            ))}
-          </div>
-          <div className="space-y-4">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-secondary mb-4">Certifications</p>
-            {certifications.map(c => (
-              <div key={c} className="text-sm font-semibold p-4 bg-surface rounded-xl border border-transparent hover:border-card-border transition-colors">
-                {c}
+              <div>
+                <h4 className="font-bold mb-2">Experience</h4>
+                <p className="text-secondary text-sm font-medium">5+ Personal Projects, 1M1B Internship, IBM & Google Certified.</p>
               </div>
-            ))}
-          </div>
+            </div>
+          </motion.div>
+          <motion.div
+            className="md:col-span-5 flex flex-col justify-center"
+            {...fadeIn}
+          >
+            <div className="p-8 bg-background border-subtle rounded-2xl shadow-xl">
+              <BookOpen className="text-accent mb-6" size={32} />
+              <h3 className="text-xl font-bold mb-2">Academic Foundation</h3>
+              <p className="font-bold text-sm text-accent mb-4">Mandsaur University — 2027</p>
+              <p className="text-sm text-secondary leading-relaxed font-medium">
+                Deep-diving into Neural Networks, Data Structures, and Modern Web Architectures.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="py-20 text-center border-t border-card-border">
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-10 tracking-tight">Let's connect.</h2>
-        <div className="max-w-xl mx-auto space-y-6 font-bold text-lg">
-          <p className="hover:text-accent transition-colors cursor-pointer">mokshika470@gmail.com</p>
-          <p className="opacity-50">+91 9376445467</p>
-          <p className="opacity-50">Mandsaur, MP, India</p>
+      {/* Projects - Interactive Grid */}
+      <section id="projects" className="py-40 px-6 max-w-5xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <motion.div {...fadeIn}>
+            <span className="section-label">Selected Portfolio</span>
+            <h2 className="text-5xl font-bold tracking-tighter">Case Studies</h2>
+          </motion.div>
+          <motion.p className="text-secondary max-w-xs font-medium text-sm lg:text-right" {...fadeIn}>
+            Each project is a unique challenge solved through thoughtful design and robust engineering.
+          </motion.p>
+        </div>
+
+        <motion.div
+          className="grid md:grid-cols-2 gap-8"
+          variants={stagger}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true }}
+        >
+          {projects.map((p, i) => (
+            <motion.div
+              key={i}
+              variants={fadeIn}
+              className="perspective"
+            >
+              <motion.div
+                whileHover={{ rotateY: -10, rotateX: 5, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="card-formal p-10 h-full flex flex-col group preserve-3d"
+              >
+                <div className="flex justify-between items-start mb-8">
+                  <div className="p-3 bg-surface rounded-xl">
+                    {p.icon}
+                  </div>
+                  <ArrowUpRight className="opacity-0 group-hover:opacity-40 transition-opacity" />
+                </div>
+                <span className="text-[10px] font-bold text-accent uppercase mb-2 tracking-widest">{p.category}</span>
+                <h3 className="text-2xl font-bold mb-1">{p.title}</h3>
+                <p className="text-sm font-semibold opacity-40 mb-6">{p.role}</p>
+                <p className="text-secondary mb-10 flex-grow font-medium text-sm leading-relaxed">{p.desc}</p>
+                <div className="flex flex-wrap gap-2 pt-6 border-t border-card-border/50">
+                  {p.tech.map(t => (
+                    <span key={t} className="text-[9px] font-bold px-2 py-1 bg-surface rounded uppercase opacity-60">{t}</span>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* Skills & Certifications */}
+      <section className="py-40 px-6 bg-primary text-background">
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-20">
+          <motion.div {...fadeIn}>
+            <span className="text-accent font-bold text-[10px] uppercase tracking-widest mb-4 block">Competencies</span>
+            <h2 className="text-5xl font-bold mb-10 leading-tight tracking-tight">The Technical <br /> Arsenal.</h2>
+            <div className="space-y-4">
+              {["Python / OpenCV", "Machine Learning", "FastAPI / Auth", "React / Next.js", "MongoDB / SQL"].map(s => (
+                <div key={s} className="flex items-center justify-between py-5 border-b border-background/10 group cursor-default">
+                  <span className="text-2xl font-bold group-hover:text-accent transition-colors">{s}</span>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map(dot => (
+                      <div key={dot} className={`w-1.5 h-1.5 rounded-full ${dot < 5 ? 'bg-accent' : 'bg-background/20'}`} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+          <motion.div {...fadeIn}>
+            <span className="text-accent font-bold text-[10px] uppercase tracking-widest mb-4 block">Verified Expertise</span>
+            <h2 className="text-5xl font-bold mb-10 leading-tight tracking-tight">Accredited <br /> Mastery.</h2>
+            <div className="grid gap-4">
+              {[
+                "IBM SkillsBuild: AI Agents",
+                "Google Cloud: Generative AI",
+                "Deloitte: Data Analytics Certification",
+                "Infosys: Python Foundation",
+                "1M1B Virtual Internship"
+              ].map(c => (
+                <div key={c} className="p-6 bg-background/5 border border-background/10 rounded-2xl flex items-center justify-between hover:bg-background/10 transition-colors">
+                  <p className="font-bold">{c}</p>
+                  <Award size={18} className="text-accent" />
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* Final Contact */}
+      <footer id="contact" className="py-48 px-6 text-center">
+        <motion.div className="max-w-2xl mx-auto" {...fadeIn}>
+          <h2 className="text-6xl md:text-8xl font-serif mb-12 tracking-tighter">Let's build <br /> together.</h2>
+          <div className="flex justify-center gap-8 mb-16">
+            {socialLinks.map((link, i) => (
+              <motion.a
+                key={i}
+                href={link.href}
+                whileHover={{ scale: 1.2, color: "var(--accent)" }}
+                className="p-5 border-subtle rounded-full text-secondary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.icon}
+              </motion.a>
+            ))}
+          </div>
+          <p className="font-bold text-lg mb-2">mokshika470@gmail.com</p>
+          <p className="text-secondary font-medium">+91 9376445467</p>
+          <div className="mt-32 opacity-20 text-[10px] font-bold uppercase tracking-[0.5em]">
+            © 2026 Mokshika Sharma — Built with Next.js & Framer Motion
+          </div>
+        </motion.div>
+      </footer>
     </main>
   );
 }
