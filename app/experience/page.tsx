@@ -8,8 +8,8 @@ export default function ExperiencePage() {
         {
             title: "1M1B Virtual Internship",
             period: "2024",
-            desc: "Completed industry-focused internship program with practical exposure to AI applications and professional collaboration.",
-            type: "Internship"
+            desc: "Immersive industry-led program focused on the intersection of AI application and professional system design.",
+            type: "Professional Residency"
         }
     ];
 
@@ -17,53 +17,67 @@ export default function ExperiencePage() {
         degree: "B.Tech in Computer Science & Engineering (AI)",
         school: "Mandsaur University",
         period: "2023 — 2027",
-        details: "Specializing in Intelligent Systems and Machine Learning applications."
-    };
-
-    const slideInLeft = {
-        initial: { opacity: 0, x: -60 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: true },
-        transition: { duration: 1, ease: [0.23, 1, 0.32, 1] }
+        details: "Focusing on Intelligent Systems, Predictive Analytics, and High-Performance Web Architecture."
     };
 
     return (
-        <main className="min-h-screen pt-48 pb-32 px-6 max-w-6xl mx-auto">
-            <motion.div {...slideInLeft} className="mb-24">
-                <span className="section-label">Work & Academic Journey</span>
-                <h1 className="text-7xl md:text-8xl font-serif italic text-primary leading-tight">Experience</h1>
+        <main className="min-h-screen pt-64 pb-48 px-6 max-w-7xl mx-auto">
+            <motion.div
+                className="mb-48"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1 }}
+            >
+                <span className="section-label">Trajectory & Legacy</span>
+                <h1 className="text-[ clamp(4rem,10vw,10rem) ] font-serif gold-text-gradient italic leading-none">
+                    Professional <br /> Evolution.
+                </h1>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-20">
-                <div>
-                    <span className="section-label">Professional</span>
+            <div className="grid lg:grid-cols-2 gap-32">
+                <div className="space-y-32">
                     {experience.map((exp, i) => (
-                        <div key={i} className="card-formal p-10 mb-8 border-none bg-surface hover-flutter transition-all rounded-[40px]">
-                            <div className="flex items-center gap-4 mb-8 text-accent">
-                                <Briefcase size={28} />
-                                <span className="text-xs font-black uppercase tracking-[0.2em]">{exp.type}</span>
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="relative pl-12 border-l border-white/5"
+                        >
+                            <div className="absolute left-[-1px] top-0 w-[1px] h-32 bg-primary/40" />
+                            <div className="flex items-center gap-6 mb-10 text-primary">
+                                <Briefcase size={24} className="opacity-60" />
+                                <span className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-40">{exp.type}</span>
                             </div>
-                            <h3 className="text-3xl font-bold mb-3">{exp.title}</h3>
-                            <p className="text-accent font-bold text-sm mb-8 tracking-widest">{exp.period}</p>
-                            <p className="text-secondary font-medium leading-[1.8]">{exp.desc}</p>
-                        </div>
+                            <h3 className="text-5xl font-serif text-foreground mb-4 italic leading-tight">{exp.title}</h3>
+                            <p className="text-primary font-bold text-sm mb-12 tracking-[0.3em] uppercase italic opacity-60">{exp.period}</p>
+                            <p className="text-luxury-desc text-lg opacity-60 leading-[2]">{exp.desc}</p>
+                        </motion.div>
                     ))}
                 </div>
 
                 <div>
-                    <span className="section-label">Education</span>
-                    <div className="card-formal p-10 border-none bg-primary text-white hover-flutter transition-all rounded-[40px] shadow-2xl">
-                        <div className="flex items-center gap-4 mb-8 text-white/40">
-                            <BookOpen size={28} />
-                            <span className="text-xs font-black uppercase tracking-[0.2em]">University</span>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="card-luxury p-16 border-white/5 bg-surface/40 hover-luxury backdrop-blur-2xl"
+                    >
+                        <div className="flex items-center gap-6 mb-12 text-primary">
+                            <BookOpen size={24} className="opacity-60" />
+                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-40">Academic Foundation</span>
                         </div>
-                        <h3 className="text-3xl font-bold mb-4">{education.degree}</h3>
-                        <p className="text-lg font-bold text-white/60 mb-8">{education.school}</p>
-                        <div className="px-5 py-2 bg-white/10 inline-block rounded-xl text-xs font-black uppercase tracking-[0.2em] mb-10">
+
+                        <h3 className="text-[ clamp(2rem,5vw,3rem) ] font-serif gold-text-gradient mb-4 italic leading-tight">{education.degree}</h3>
+                        <p className="text-2xl font-serif text-secondary mb-12 italic opacity-60">— {education.school}</p>
+
+                        <div className="px-8 py-3 bg-primary/5 border border-primary/10 inline-block rounded-full text-[10px] font-bold uppercase tracking-[0.4em] text-primary mb-12">
                             {education.period}
                         </div>
-                        <p className="text-lg font-medium text-white/80 leading-[1.8]">{education.details}</p>
-                    </div>
+
+                        <p className="text-luxury-desc text-lg opacity-60 italic leading-[2]">{education.details}</p>
+                    </motion.div>
                 </div>
             </div>
         </main>

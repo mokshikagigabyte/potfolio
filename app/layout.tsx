@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import "./globals.css";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 export const metadata: Metadata = {
-  title: "Mokshika Sharma | AI & Web Developer",
-  description: "Professional portfolio of Mokshika Sharma, specializing in Artificial Intelligence and Web Application Development.",
+  title: "Mokshika Sharma | Luxury AI & Web Experience",
+  description: "Elite professional portfolio of Mokshika Sharma, specializing in Artificial Intelligence and High-Performance Web Architecture.",
 };
 
 export default function RootLayout({
@@ -15,77 +16,67 @@ export default function RootLayout({
 }>) {
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
+    { name: "Profile", href: "/about" },
     { name: "Internship", href: "/experience" },
     { name: "Projects", href: "/projects" },
     { name: "Achievements", href: "/achievements" },
   ];
 
-  const socialLinks = [
-    { icon: <Github size={18} />, href: "https://github.com/mokshikagigabyte" },
-    { icon: <Linkedin size={18} />, href: "https://linkedin.com/in/mokshika-sharma" },
-  ];
-
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased font-sans bg-background text-foreground selection:bg-accent selection:text-white">
-        <header className="fixed top-0 w-full z-50 px-6 py-8 backdrop-blur-md border-b border-card-border/50">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold tracking-tighter hover:opacity-70 transition-opacity">
+      <body className="antialiased font-sans bg-background text-foreground selection:bg-primary selection:text-background">
+        <AnimatedBackground />
+
+        <header className="fixed top-0 w-full z-50 px-6 py-10 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto flex justify-between items-center border-b border-white/5 pb-6">
+            <Link href="/" className="text-2xl font-serif gold-text-gradient tracking-tighter hover:opacity-70 transition-opacity italic">
               MS.
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-12">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
+                  className="text-[10px] font-bold uppercase tracking-[0.25em] text-secondary hover:text-primary transition-all duration-300"
                 >
                   {link.name}
                 </Link>
               ))}
             </nav>
 
-            <div className="flex items-center gap-4">
-              {socialLinks.map((link, i) => (
-                <a
-                  key={i}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary hover:text-accent transition-colors"
-                >
-                  {link.icon}
-                </a>
-              ))}
+            <div className="flex items-center gap-6">
+              <a href="https://github.com/mokshikagigabyte" className="text-secondary hover:text-primary transition-colors"><Github size={18} /></a>
+              <a href="https://linkedin.com/in/mokshika-sharma" className="text-secondary hover:text-primary transition-colors"><Linkedin size={18} /></a>
             </div>
           </div>
         </header>
 
-        {children}
+        <div className="relative z-10">
+          {children}
+        </div>
 
-        <footer className="py-24 px-6 border-t border-card-border">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-            <div className="text-center md:text-left">
-              <h2 className="text-4xl font-serif italic mb-4">Mokshika Sharma</h2>
-              <p className="text-secondary font-medium">AI Specialist & Web Developer</p>
+        <footer className="py-32 px-6 border-t border-white/5 bg-background relative z-10">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-16">
+            <div>
+              <h2 className="text-6xl font-serif gold-text-gradient italic mb-6">Mokshika Sharma</h2>
+              <p className="text-secondary font-medium tracking-wide uppercase text-xs">AI Specialist & Web Architect</p>
             </div>
 
-            <div className="flex gap-8">
+            <div className="flex gap-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-accent transition-colors"
+                  className="text-[9px] font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
 
-            <div className="text-center md:text-right opacity-30 text-[10px] font-bold uppercase tracking-[0.2em]">
-              © 2026 Mokshika Sharma — All Rights Reserved
+            <div className="text-right opacity-20 text-[9px] font-bold uppercase tracking-[0.3em]">
+              © 2026 Crafted for Excellence
             </div>
           </div>
         </footer>

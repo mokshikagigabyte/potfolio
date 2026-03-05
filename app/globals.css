@@ -1,17 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #09090b;
-  --primary: #18181b;
-  --accent: #2563eb;
-  --secondary: #71717a;
-  --card-bg: #ffffff;
-  --card-border: #e4e4e7;
-  --surface: #f4f4f5;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  /* Luxury Formal Palette */
+  --background: #0a0a0a;
+  /* Midnight Charcoal */
+  --foreground: #fdfcf8;
+  /* Soft Parchment */
+
+  --primary: #c5a059;
+  /* Champagne Gold */
+  --secondary: #8a8a8a;
+  --accent: #c5a059;
+  --accent-soft: rgba(197, 160, 89, 0.1);
+
+  --surface: #121212;
+  --card-border: rgba(197, 160, 89, 0.15);
+
+  --font-serif: "DM Serif Display", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --shadow-gold: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 160, 89, 0.1);
+
+  --letter-spacing-tight: -0.04em;
+  --letter-spacing-wide: 0.2em;
+
+  --line-height-luxury: 1.8;
 }
 
 @theme inline {
@@ -20,54 +34,63 @@
   --color-primary: var(--primary);
   --color-accent: var(--accent);
   --color-secondary: var(--secondary);
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-serif: 'Instrument Serif', serif;
+  --color-surface: var(--surface);
+  --color-card-border: var(--card-border);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --primary: #ffffff;
-    --accent: #3b82f6;
-    --secondary: #a1a1aa;
-    --card-bg: #18181b;
-    --card-border: #27272a;
-    --surface: #18181b;
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+    line-height: var(--line-height-luxury);
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: 1.05;
   }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@layer components {
+  .section-label {
+    @apply text-[11px] font-bold uppercase tracking-[0.4em] text-primary mb-8 block opacity-80;
+  }
+
+  .card-luxury {
+    @apply bg-surface border border-card-border rounded-[40px] transition-all duration-700 backdrop-blur-sm;
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-luxury {
+    @apply px-10 py-5 bg-primary text-background rounded-full font-bold text-[10px] uppercase tracking-[0.25em] transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_0_50px_rgba(197, 160, 89, 0.3)] active:scale-95;
+  }
+
+  .text-luxury-desc {
+    @apply text-xl md:text-2xl text-secondary font-medium leading-[1.8] text-balance;
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
+/* Luxury Hover Effects */
+.hover-luxury:hover {
+  transform: translateY(-8px);
+  border-color: rgba(197, 160, 89, 0.4);
 }
 
-h1,
-.font-serif {
-  font-family: var(--font-serif);
-  letter-spacing: -0.01em;
-  font-style: italic;
-}
-
-h2,
-h3,
-h4 {
-  font-family: var(--font-sans);
-  letter-spacing: -0.02em;
+.gold-text-gradient {
+  background: linear-gradient(135deg, #fdfcf8 0%, #c5a059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .perspective {
-  perspective: 1000px;
+  perspective: 2000px;
 }
 
 .preserve-3d {
@@ -76,36 +99,4 @@ h4 {
 
 .backface-hidden {
   backface-visibility: hidden;
-}
-
-.border-subtle {
-  border: 1px solid var(--card-border);
-}
-
-.card-formal {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.card-formal:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
-}
-
-.section-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--accent);
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.text-balance {
-  text-wrap: balance;
 }
