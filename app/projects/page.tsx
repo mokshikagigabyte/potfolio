@@ -39,47 +39,48 @@ export default function ProjectsPage() {
         }
     ];
 
-    const fadeIn = {
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
+    const slideInLeft = {
+        initial: { opacity: 0, x: -60 },
+        whileInView: { opacity: 1, x: 0 },
         viewport: { once: true },
-        transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] }
+        transition: { duration: 1, ease: [0.23, 1, 0.32, 1] }
     };
 
     return (
-        <main className="min-h-screen pt-48 pb-32 px-6 max-w-5xl mx-auto">
-            <motion.section {...fadeIn}>
-                <span className="section-label mb-4">Selected Portfolio</span>
-                <h1 className="text-6xl md:text-8xl font-serif mb-16 italic">Case Studies</h1>
+        <main className="min-h-screen pt-48 pb-32 px-6 max-w-6xl mx-auto">
+            <motion.div {...slideInLeft} className="mb-24">
+                <span className="section-label">Selected Portfolio</span>
+                <h1 className="text-7xl md:text-8xl font-serif italic text-primary leading-tight">Case Studies</h1>
+            </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {projects.map((p, i) => (
-                        <div key={i} className="perspective">
-                            <motion.div
-                                whileHover={{ rotateY: -10, rotateX: 5, scale: 1.02 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                className="card-formal p-10 h-full flex flex-col group preserve-3d"
-                            >
-                                <div className="flex justify-between items-start mb-8">
-                                    <div className="p-3 bg-surface rounded-xl">
-                                        {p.icon}
-                                    </div>
-                                    <ArrowUpRight className="opacity-0 group-hover:opacity-40 transition-opacity" />
-                                </div>
-                                <span className="text-[10px] font-bold text-accent uppercase mb-2 tracking-widest">{p.category}</span>
-                                <h3 className="text-2xl font-bold mb-1">{p.title}</h3>
-                                <p className="text-sm font-semibold opacity-40 mb-6">{p.role}</p>
-                                <p className="text-secondary mb-10 flex-grow font-medium text-sm leading-relaxed">{p.desc}</p>
-                                <div className="flex flex-wrap gap-2 pt-6 border-t border-card-border/50">
-                                    {p.tech.map(t => (
-                                        <span key={t} className="text-[9px] font-bold px-2 py-1 bg-surface rounded uppercase opacity-60">{t}</span>
-                                    ))}
-                                </div>
-                            </motion.div>
+            <div className="grid md:grid-cols-2 gap-10">
+                {projects.map((p, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        className="card-formal p-10 h-full flex flex-col group hover-flutter border-subtle hover:border-accent group-hover:shadow-2xl transition-all duration-700"
+                    >
+                        <div className="flex justify-between items-start mb-10">
+                            <div className="p-4 bg-accent-soft text-accent rounded-2xl w-fit">
+                                {p.icon}
+                            </div>
+                            <ArrowUpRight className="opacity-0 group-hover:opacity-40 transition-all duration-500" />
                         </div>
-                    ))}
-                </div>
-            </motion.section>
+                        <span className="text-[10px] font-black text-accent uppercase mb-3 tracking-[0.2em]">{p.category}</span>
+                        <h3 className="text-3xl font-bold mb-2 group-hover:text-accent transition-colors">{p.title}</h3>
+                        <p className="text-xs font-bold opacity-40 mb-6 uppercase tracking-widest">{p.role}</p>
+                        <p className="text-secondary mb-12 flex-grow font-medium leading-[1.8] text-sm">{p.desc}</p>
+                        <div className="flex flex-wrap gap-2 pt-8 border-t border-card-border/50">
+                            {p.tech.map(t => (
+                                <span key={t} className="text-[9px] font-black px-3 py-1.5 bg-surface rounded-full uppercase tracking-tighter opacity-60">{t}</span>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
         </main>
     );
 }

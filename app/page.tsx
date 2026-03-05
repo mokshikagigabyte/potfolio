@@ -11,11 +11,18 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
+  const slideInLeft = {
+    initial: { opacity: 0, x: -60 },
+    whileInView: { opacity: 1, x: 0 },
     viewport: { once: true },
-    transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] }
+    transition: { duration: 1, ease: [0.23, 1, 0.32, 1] }
+  };
+
+  const slideInRight = {
+    initial: { opacity: 0, x: 60 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 1, ease: [0.23, 1, 0.32, 1] }
   };
 
   const navCards = [
@@ -26,58 +33,57 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background selection:bg-accent selection:text-white">
       {/* Hero */}
-      <section className="pt-48 pb-32 px-6 max-w-5xl mx-auto">
-        <motion.div {...fadeIn}>
-          <span className="section-label mb-4">AI & Web Application Developer</span>
-          <h1 className="text-7xl md:text-9xl font-serif mb-8 leading-[0.85] tracking-tight">
-            Mokshika <br /> Sharma
-          </h1>
-          <p className="text-xl md:text-3xl text-secondary mb-12 max-w-2xl font-medium leading-tight text-balance">
-            Crafting intelligent systems and high-performance digital experiences at the intersection of AI and Web.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/projects"
-              className="px-8 py-4 bg-primary text-background rounded-full font-bold text-sm hover:opacity-90 transition-opacity"
-            >
-              View Case Studies
-            </Link>
-          </div>
-        </motion.div>
+      <section className="pt-64 pb-32 px-6 max-w-6xl mx-auto overflow-hidden">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div {...slideInLeft}>
+            <span className="section-label">AI Specialist & Web Architect</span>
+            <h1 className="text-8xl md:text-[10rem] font-serif mb-12 leading-[0.8] tracking-tighter text-primary italic">
+              Mokshika <br /> <span className="text-accent underline decoration-1 underline-offset-8">Sharma</span>
+            </h1>
+          </motion.div>
+
+          <motion.div {...slideInRight} className="lg:pt-24">
+            <p className="text-2xl md:text-3xl text-secondary mb-12 font-medium leading-[1.6] text-balance">
+              Building transformative digital systems where <span className="text-primary italic">Machine Intelligence</span> meets elegant <span className="text-primary italic">Web Performance</span>.
+            </p>
+            <div className="flex flex-wrap gap-6">
+              <Link href="/projects" className="btn-flutter group flex items-center gap-3">
+                Explore Work <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Quick Navigation Grid */}
-      <section className="py-32 px-6 max-w-5xl mx-auto">
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ staggerChildren: 0.1 }}
-        >
+      <section className="py-40 px-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {navCards.map((card, i) => (
             <Link key={i} href={card.href} className="group">
               <motion.div
-                whileHover={{ y: -8 }}
-                className="card-formal p-8 h-full flex flex-col justify-between border-subtle hover:border-accent transition-all duration-500"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="card-formal p-10 h-full flex flex-col justify-between hover-flutter border-subtle hover:border-accent group-hover:shadow-2xl transition-all duration-700"
               >
                 <div>
-                  <div className="p-3 bg-surface rounded-xl w-fit mb-6 text-accent">
+                  <div className="p-4 bg-accent-soft text-accent rounded-2xl w-fit mb-8">
                     {card.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors flex items-center justify-between">
+                  <h3 className="text-2xl font-bold mb-3 flex items-center justify-between">
                     {card.title}
-                    <ArrowUpRight size={16} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                   </h3>
-                  <p className="text-sm text-secondary font-medium leading-relaxed">
+                  <p className="text-secondary font-medium leading-[1.6] opacity-70">
                     {card.desc}
                   </p>
                 </div>
               </motion.div>
             </Link>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Featured Insight */}
